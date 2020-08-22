@@ -28,16 +28,17 @@ const getProduct = (req, res) => {
 };
 
 const changeProductStatus = (req, res) => {
-  const { id } = req.params;
-  var updateData = req.body;
+  console.log('wwrwrw');
+  // const { id } = req.body.ids;
+  // var updateData = req.body;
 
-  console.log(id)
+  // console.log(id)
   db.Product.update(
     { status: "1" },
     { where: { id },
 
-  }).then((user) => {
-    res.json(user);
+  }).then((product) => {
+    res.json(product);
   }).catch((err) => {
     res.status(500).send({ error: err });
   });

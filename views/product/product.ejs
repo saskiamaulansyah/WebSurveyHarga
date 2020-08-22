@@ -55,7 +55,7 @@
                                         <th>id</th>
                                         <th>Product Name</th>
                                         <th>Price</th>
-                                        <th>Approved?</th>
+                                        <th>Approved</th>
 
                                     </tr>
                                 </thead>
@@ -98,14 +98,12 @@
                                                     </td>
                                             <% }else{%>
                                                 
-                                                <form name="jsform" id="jsform" method="PATCH" action="">
                                                     <td><label class="custom-toggle">
                                                             <input type="checkbox" onclick="valueChange('<%=product.id%>')" >
                                                             <span class="custom-toggle-slider rounded-circle" data-label-off="No"
                                                                 data-label-on="Yes" ></span>
                                                         </label>
                                                     </td>
-                                                </form>
                                             <% }%>
                                             
                                         <% } else { %>
@@ -200,7 +198,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="confirmModal" tabindex="-1" role="dialog" >
+       
+    </div>
+    </div>
+    <div class="modal" id="confirmModal" tabindex="-1" role="dialog" >
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -210,17 +211,19 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Modal body text goes here.</p>
+                    
+                <form role="form" name="jsform" id="jsform" method="PATCH" action="">
+                        <input type="text" id="ids" value="1">
+                  <p>Are you sure to approve this product?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="submit" class="btn btn-primary">Confirm changes</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
+                </form>
               </div>
             </div>
           </div>
-    </div>
-    </div>
     </div>
     <%- include ("../templates/script") -%>
 
@@ -229,13 +232,10 @@
 </html>
 <script>
     function valueChange(id){
-        console.log(id);
-        //$('#formId').attr('action', 'page1');
-   document.getElementById("jsform").action = '/product/'+id;  
-   document.getElementById("jsform").method = 'PATCH';  
-   
-   //var newString = document.getElementById("jsform").action.replace('?', '');  
-  document.getElementById('jsform').submit();
+        $('#confirmModal').modal('show');
+        $('#ids').val(id);
+        document.getElementById("jsform").action = '/statusproduct';  
+        document.getElementById("jsform").method = 'PATCH';  
     }
     function openModal() {
         $('#modalAdd').modal('show');

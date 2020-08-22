@@ -19,7 +19,7 @@ router.get('/product', indexProduct);
 
 router.get('/getProduct', getProduct);
 router.post('/addproduct', addProduct);
-router.patch('/product/id?', changeProductStatus);
+router.patch('/statusproduct', changeProductStatus);
 
 
 module.exports = router;

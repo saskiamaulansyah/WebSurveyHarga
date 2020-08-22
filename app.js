@@ -44,7 +44,6 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
-
 // error handler
 app.use((err, req, res) => {
   // set locals, only providing error in development
