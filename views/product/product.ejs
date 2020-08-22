@@ -99,7 +99,7 @@
                                             <% }else{%>
                                                 
                                                     <td><label class="custom-toggle">
-                                                            <input type="checkbox" onclick="valueChange('<%=product.id%>')" >
+                                                            <input type="checkbox" >
                                                             <span class="custom-toggle-slider rounded-circle" data-label-off="No"
                                                                 data-label-on="Yes" ></span>
                                                         </label>
@@ -213,7 +213,7 @@
                 <div class="modal-body">
                     
                 <form role="form" name="jsform" id="jsform" method="PATCH" action="">
-                        <input type="text" id="ids" value="1">
+                        <input type="text" id="ids" value="" hidden>
                   <p>Are you sure to approve this product?</p>
                 </div>
                 <div class="modal-footer">
