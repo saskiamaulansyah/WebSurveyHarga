@@ -29,4 +29,6 @@ router.get('/register', indexRegister);
 router.post('/actionregister', registerUser);
 router.post('/actionlogin', loginUser);
 
+router.get('/logout', logout);
+
 module.exports = router;
