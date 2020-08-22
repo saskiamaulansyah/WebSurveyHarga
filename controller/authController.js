@@ -69,7 +69,7 @@ const loginUser = (req, res) => {
           }
 
           console.log('uname');
-          session.username = username;
+          session.username = user.name;
           session.roleId = user.role_id;
           console.log('uname', session.roleId);
           localStorage.setItem('token', token);
@@ -107,7 +107,7 @@ const registerUser = (req, res) => {
         ...req.body,
         password: hash,
       }).then((result) => {
-        res.json(result);
+        res.render('login/login');
       }).catch((err) => {
         const { errors, name } = err;
         const messages = [];

@@ -4,7 +4,7 @@ const db = require('../models');
 // View Index
 const indexProduct = (req, res) => {
     db.Product.findAll({}).then((product) => {
-      console.log('productsss',product);
+      console.log('productsss',req.session.roleId);
       res.render('product/product', { dataProduct: product, session:req.session});
   }).catch((err) => {
       res.status(500).send({ error: err });
@@ -31,6 +31,7 @@ const changeProductStatus = (req, res) => {
   const { id } = req.params;
   var updateData = req.body;
 
+  console.log(id)
   db.Product.update(
     { status: "1" },
     { where: { id },

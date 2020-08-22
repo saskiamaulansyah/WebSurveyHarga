@@ -55,9 +55,15 @@
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                      <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input class="form-control" placeholder="role" type="role" name="role_id" id="role_id">
+                    <select class="form-control"  onchange="myFunction(event)">
+                      <option value="0"  disabled selected>Select one</option>
+                      <option value="1">Surveyor</option>
+                      <option value="2">Admin</option>
+                      <option value="3">Pengunjung</option>
+                    </select>
+                    <input class="form-control" placeholder="role" type="role" name="role_id" id="role_id" hidden>
                   </div>
                 </div>
                  <div class="form-group">
@@ -100,3 +106,10 @@
  </body>
  
  </html>
+
+ <script>
+ 
+ function myFunction(e) {
+    document.getElementById("role_id").value = e.target.value
+}
+</script>

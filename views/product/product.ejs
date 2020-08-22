@@ -25,9 +25,12 @@
                                 </ol>
                             </nav>
                         </div>
+
+                        <% if(session.roleId == 1){ %>
                         <div class="col-lg-6 col-5 text-right">
                             <a href="#" class="btn btn-sm btn-neutral" onclick="openModal()">Add Product</a>
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -58,29 +61,83 @@
                                 </thead>
                                 <tbody>
                                     <% dataProduct.forEach( product => { %>
-                                      <tr>
-                                        <td><%=product.id%></td>
-                                        <td><%=product.productname%></td>
-                                        <td><%=product.price%></td>
-
-                                        <% if(product.status == "1") { %>
-                                            <td><label class="custom-toggle">
-                                                <input type="checkbox" checked>
-                                                <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
-                                            </label>
-                                            </td>
+                                    <tr>
+                                        
+                                        <% if(session.roleId == 1){ %>
+                                            
+                                            <td><%=product.id%></td>
+                                            <td><%=product.productname%></td>
+                                            <td><%=product.price%></td>
+                                            <% if(product.status == "1") { %>
+                                                <td><label class="custom-toggle">
+                                                        <input type="checkbox" checked disabled>
+                                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                            data-label-on="Yes" disabled></span>
+                                                    </label>
+                                                </td>
                                             <% }else{%>
                                                 <td><label class="custom-toggle">
-                                                    <input type="checkbox">
-                                                    <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
-                                                </label>
+                                                        <input type="checkbox" disabled>
+                                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                            data-label-on="Yes" disabled></span>
+                                                    </label>
                                                 </td>
                                             <% }%>
-                                        
-                                      </tr>
-                    
-                                      <% }) %>
-                                  </tbody>
+                                            
+                                        <% } else if(session.roleId == 2){ %>
+                                            
+                                            <td><%=product.id%></td>
+                                            <td><%=product.productname%></td>
+                                            <td><%=product.price%></td>
+                                            <% if(product.status == "1") { %>
+                                                    <td><label class="custom-toggle">
+                                                            <input type="checkbox" checked disabled>
+                                                            <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                                data-label-on="Yes" ></span>
+                                                        </label>
+                                                    </td>
+                                            <% }else{%>
+                                                
+                                                <form name="jsform" id="jsform" method="PATCH" action="">
+                                                    <td><label class="custom-toggle">
+                                                            <input type="checkbox" onclick="valueChange('<%=product.id%>')" >
+                                                            <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                                data-label-on="Yes" ></span>
+                                                        </label>
+                                                    </td>
+                                                </form>
+                                            <% }%>
+                                            
+                                        <% } else { %>
+                                            
+                                            <% if(product.status == "1") { %>
+                                                <td><%=product.id%></td>
+                                                <td><%=product.productname%></td>
+                                                <td><%=product.price%></td>
+                                                <td><label class="custom-toggle">
+                                                        <input type="checkbox" checked disabled>
+                                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                            data-label-on="Yes" disabled></span>
+                                                    </label>
+                                                </td>
+                                            <% }else{%>
+                                                <td hidden><%=product.id%></td>
+                                                <td hidden><%=product.productname%></td>
+                                                <td hidden><%=product.price%></td>
+                                                <td hidden><label class="custom-toggle">
+                                                        <input type="checkbox" disabled>
+                                                        <span class="custom-toggle-slider rounded-circle" data-label-off="No"
+                                                            data-label-on="Yes" disabled></span>
+                                                    </label>
+                                                </td>
+                                            <% }%>
+
+                                        <% }%>
+
+                                    </tr>
+
+                                    <% }) %>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -90,14 +147,16 @@
             <%- include ("../templates/footer") -%>
         </div>
         <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+            aria-hidden="true" >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <% if(session.roleId == 1){ %>
                         <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                         <button type="reset" class="close" data-dismiss="modal" aria-label="Close" onclick="Clear();">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        <%}%>
                     </div>
                     <div class="modal-body">
                         <form role="form" id="addproduct" action="/addproduct" method="POST">
@@ -141,7 +200,26 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal" id="confirmModal" tabindex="-1" role="dialog" >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
     </div>
     </div>
     <%- include ("../templates/script") -%>
@@ -150,14 +228,35 @@
 
 </html>
 <script>
+    function valueChange(id){
+        console.log(id);
+        //$('#formId').attr('action', 'page1');
+   document.getElementById("jsform").action = '/product/'+id;  
+   document.getElementById("jsform").method = 'PATCH';  
+   
+   //var newString = document.getElementById("jsform").action.replace('?', '');  
+  document.getElementById('jsform').submit();
+    }
     function openModal() {
         $('#modalAdd').modal('show');
     }
     // Jquery Dependency
+    // function openEditModal(id,productname,price,status) {
+        
+    //     $('#confirmModal').modal('show');
+        
+    //     // document.getElementById("productname").style.display ="none";
+    //     // document.getElementById("price").style.display ="none";
+    //     //     $('#productname').val(productname);
+    //     //     $('#price').val(price);
 
+    //     //     console.log( $('#price').val());
+            
+    //     document.getElementById("addproduct").action = '/product/'+id;   
+    //     document.getElementById("addproduct").method = 'PUT';     
+        
+    // }
     
-    
-
 
     function formatNumber(n) {
         // format number 1000000 to 1,234,567
@@ -245,4 +344,10 @@
         }
     }
 
+    function setform(){
+        document.getElementById("modalAdd").action = '/changeProductStatus';
+        
+    }
+    
+    
 </script>
