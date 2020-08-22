@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include ("../templates/header") -%>
+</head>
+
+<body>
+    <%- include ("../templates/sidebar") -%>
+    <div class="main-content" id="panel">
+        <!-- Topnav -->
+        
+    <%- include ("../templates/navbar") -%>
+        <!-- Header -->
+        <!-- Header -->
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">Google maps</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="#">Maps</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Google maps</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            <a href="#" class="btn btn-sm btn-neutral">New</a>
+                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content -->
+        <div class="container-fluid mt--6">
+            <div class="row">
+                <div class="col">
+                    <div class="card border-0">
+                        <form id="formAdd" action="/addProduct" method="POST">
+                            <div class="form-group col-lg-6">
+                                <label for="example-text-input" class="form-control-label">Product Name</label>
+                                <input class="form-control" type="text" value="" id="example-text-input">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="example-search-input" class="form-control-label">Price</label>
+                                <input class="form-control" type="search" value="" id="example-search-input">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                
+                                    <label for="example-search-input" class="form-control-label">Status</label>
+                                    <select class="form-control">
+                                            <option value="1">Approved</option>
+                                            <option value="2">Not yet approved</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                
+                                        <button class="btn btn-primary" type="submit">Add</button>
+                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include ("../templates/footer") -%>
+    </div>
+    </div>
+    <%- include ("../templates/script") -%>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: -7.966, lng: 112.632 };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 18, center: uluru });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: uluru, map: map });
+            // console.log('aw', x, y, checkpoint_name);
+            // var myLocation = { lat: -25.363, lng: 131.044 };
+            // var pos = {
+            //     lat: -25.363,
+            //     lng: 131.044
+            // };
+            // var latlngStr = [-25.363, 131.044];
+            // var checkpointName = checkpoint_name;
+            // console.log('checkpointtttt', checkpointName);
+            // console.log('mylocation', myLocation);
+            // map = new google.maps.Map(document.getElementById('map'), {
+            //     center: myLocation,
+            //     zoom: 20,
+            //     zoomControl: true,
+            //     scaleControl: true,
+            //     gestureHandling: 'greedy',
+
+
+            // });
+
+            // geocoder = new google.maps.Geocoder;
+            // map.setCenter(pos);
+            // console.log('sasasasasasasa', pos);
+            // map.setZoom(10);
+            // geocodeLatLng(geocoder, map, infoWindow, latlngStr, checkpointName)
+
+            // var marker = new google.maps.Marker({
+            //     position: myLocation,
+            //     map: map,
+            //     title: 'click'
+            // });
+
+
+        }
+        function tesMap(x, y) {
+            // The location of Uluru
+            console.log(x, y);
+            var xx = { lat: x, lng: y };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 10, center: xx });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: xx, map: map });
+            // console.log('aw', x, y, checkpoint_name);
+            // var myLocation = { lat: -25.363, lng: 131.044 };
+            // var pos = {
+            //     lat: -25.363,
+            //     lng: 131.044
+            // };
+            // var latlngStr = [-25.363, 131.044];
+            // var checkpointName = checkpoint_name;
+            // console.log('checkpointtttt', checkpointName);
+            // console.log('mylocation', myLocation);
+            // map = new google.maps.Map(document.getElementById('map'), {
+            //     center: myLocation,
+            //     zoom: 20,
+            //     zoomControl: true,
+            //     scaleControl: true,
+            //     gestureHandling: 'greedy',
+
+
+            // });
+
+            // geocoder = new google.maps.Geocoder;
+            // map.setCenter(pos);
+            // console.log('sasasasasasasa', pos);
+            // map.setZoom(10);
+            // geocodeLatLng(geocoder, map, infoWindow, latlngStr, checkpointName)
+
+            // var marker = new google.maps.Marker({
+            //     position: myLocation,
+            //     map: map,
+            //     title: 'click'
+            // });
+
+
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULABUoHtpPhMrcnWNbgOTqwRADz2AcHw&callback=initMap"></script>
+
+</body>
+
+</html>
