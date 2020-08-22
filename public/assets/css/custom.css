@@ -1,0 +1,40 @@
+.mix{
+    border: 1px solid lightgrey;
+}
+
+#myDiv{
+    margin-top:10px;
+    margin-left: 0px;
+    margin-right: 8px;
+}
+b{
+    font-weight: bold;
+}
+.image-maps{
+    float: left;
+    margin-right: 10px;
+}
+
+.mylabel {
+    display: inline-block;
+    width: 5em;
+    margin-bottom: 0px;
+    margin-top:0px;
+  }
+.div-hover{
+    position: absolute; 
+    top: 0px;
+    margin-top: 90px; 
+    margin-left: 10px; 
+    width: 240px; 
+    height: 470px; 
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow:0 5px 10px rgba(0,0,0,0.3);
+}
+
+.label-danger{background-color:#d9534f}
+.label{display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em}
+.buttonExport{
+    margin-bottom:20px;
+}
