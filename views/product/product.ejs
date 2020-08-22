@@ -9,27 +9,24 @@
     <%- include ("../templates/sidebar") -%>
     <div class="main-content" id="panel">
         <!-- Topnav -->
-        
-    <%- include ("../templates/navbar") -%>
-        <!-- Header -->
-        <!-- Header -->
+
+        <%- include ("../templates/navbar") -%>
         <div class="header bg-primary pb-6">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Google maps</h6>
+                            <h6 class="h2 text-white d-inline-block mb-0">Product</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="#">Maps</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Google maps</li>
+                                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Product</li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral">New</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                            <a href="#" class="btn btn-sm btn-neutral" onclick="openModal()">Add Product</a>
                         </div>
                     </div>
                 </div>
@@ -37,134 +34,202 @@
         </div>
         <!-- Page content -->
         <div class="container-fluid mt--6">
+            <!-- Table -->
             <div class="row">
                 <div class="col">
-                    <div class="card border-0">
-                        <form id="formAdd" action="/addProduct" method="POST">
-                            <div class="form-group col-lg-6">
-                                <label for="example-text-input" class="form-control-label">Product Name</label>
-                                <input class="form-control" type="text" value="" id="example-text-input">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <label for="example-search-input" class="form-control-label">Price</label>
-                                <input class="form-control" type="search" value="" id="example-search-input">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                
-                                    <label for="example-search-input" class="form-control-label">Status</label>
-                                    <select class="form-control">
-                                            <option value="1">Approved</option>
-                                            <option value="2">Not yet approved</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                
-                                        <button class="btn btn-primary" type="submit">Add</button>
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h3 class="mb-0">Product</h3>
+                            <p class="text-sm mb-0">
+
+                            </p>
+                        </div>
+                        <div class="table-responsive py-4">
+                            <table class="table table-flush" id="datatable-basic">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include ("../templates/footer") -%>
+        </div>
+        <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                        <button type="reset" class="close" data-dismiss="modal" aria-label="Close" onclick="Clear();">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/addproduct" method="POST">
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Product Name</label>
+                                            <input type="text" id="productname" name="productname" class="form-control"
+                                                placeholder="Product Name">
+                                        </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Price</label>
+                                            <input type="text" name="currency-field" id="currency-field"
+                                                class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
+                                                data-type="currency" placeholder="1,000.00">
+                                        </div>
+                                    </div>
+                                    <input type="text" id="status" name="status" class="form-control" value="1" hidden>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">Status</label>
+                                            <select class="form-control">
+                                                <option>--Select--</option>
+                                                <option value="1">Approved</option>
+                                                <option value="2">Not approved yet</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+
                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <%- include ("../templates/footer") -%>
     </div>
     </div>
     <%- include ("../templates/script") -%>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        function initMap() {
-            // The location of Uluru
-            var uluru = { lat: -7.966, lng: 112.632 };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 18, center: uluru });
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({ position: uluru, map: map });
-            // console.log('aw', x, y, checkpoint_name);
-            // var myLocation = { lat: -25.363, lng: 131.044 };
-            // var pos = {
-            //     lat: -25.363,
-            //     lng: 131.044
-            // };
-            // var latlngStr = [-25.363, 131.044];
-            // var checkpointName = checkpoint_name;
-            // console.log('checkpointtttt', checkpointName);
-            // console.log('mylocation', myLocation);
-            // map = new google.maps.Map(document.getElementById('map'), {
-            //     center: myLocation,
-            //     zoom: 20,
-            //     zoomControl: true,
-            //     scaleControl: true,
-            //     gestureHandling: 'greedy',
-
-
-            // });
-
-            // geocoder = new google.maps.Geocoder;
-            // map.setCenter(pos);
-            // console.log('sasasasasasasa', pos);
-            // map.setZoom(10);
-            // geocodeLatLng(geocoder, map, infoWindow, latlngStr, checkpointName)
-
-            // var marker = new google.maps.Marker({
-            //     position: myLocation,
-            //     map: map,
-            //     title: 'click'
-            // });
-
-
-        }
-        function tesMap(x, y) {
-            // The location of Uluru
-            console.log(x, y);
-            var xx = { lat: x, lng: y };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 10, center: xx });
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({ position: xx, map: map });
-            // console.log('aw', x, y, checkpoint_name);
-            // var myLocation = { lat: -25.363, lng: 131.044 };
-            // var pos = {
-            //     lat: -25.363,
-            //     lng: 131.044
-            // };
-            // var latlngStr = [-25.363, 131.044];
-            // var checkpointName = checkpoint_name;
-            // console.log('checkpointtttt', checkpointName);
-            // console.log('mylocation', myLocation);
-            // map = new google.maps.Map(document.getElementById('map'), {
-            //     center: myLocation,
-            //     zoom: 20,
-            //     zoomControl: true,
-            //     scaleControl: true,
-            //     gestureHandling: 'greedy',
-
-
-            // });
-
-            // geocoder = new google.maps.Geocoder;
-            // map.setCenter(pos);
-            // console.log('sasasasasasasa', pos);
-            // map.setZoom(10);
-            // geocodeLatLng(geocoder, map, infoWindow, latlngStr, checkpointName)
-
-            // var marker = new google.maps.Marker({
-            //     position: myLocation,
-            //     map: map,
-            //     title: 'click'
-            // });
-
-
-        }
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCULABUoHtpPhMrcnWNbgOTqwRADz2AcHw&callback=initMap"></script>
 
 </body>
 
 </html>
+<script>
+    function openModal() {
+
+        $('#modalAdd').modal('show');
+    }
+    // Jquery Dependency
+
+    $("input[data-type='currency']").on({
+        keyup: function () {
+            formatCurrency($(this));
+        },
+        blur: function () {
+            formatCurrency($(this), "blur");
+        }
+    });
+
+
+    function formatNumber(n) {
+        // format number 1000000 to 1,234,567
+        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+
+    function formatCurrency(input, blur) {
+        // appends $ to value, validates decimal side
+        // and puts cursor back in right position.
+
+        // get input value
+        var input_val = input.val();
+
+        // don't validate empty input
+        if (input_val === "") { return; }
+
+        // original length
+        var original_len = input_val.length;
+
+        // initial caret position 
+        var caret_pos = input.prop("selectionStart");
+
+        // check for decimal
+        if (input_val.indexOf(".") >= 0) {
+
+            // get position of first decimal
+            // this prevents multiple decimals from
+            // being entered
+            var decimal_pos = input_val.indexOf(".");
+
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
+
+            // validate right side
+            right_side = formatNumber(right_side);
+
+            // On blur make sure 2 numbers after decimal
+            if (blur === "blur") {
+                right_side += "00";
+            }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = "" + left_side + "." + right_side;
+
+        } else {
+            // no decimal entered
+            // add commas to number
+            // remove all non-digits
+            input_val = formatNumber(input_val);
+            input_val = "" + input_val;
+
+            // final formatting
+            if (blur === "blur") {
+                input_val += ".00";
+            }
+        }
+
+        // send updated string to input
+        input.val(input_val);
+
+        // put caret back in the right position
+        var updated_len = input_val.length;
+        caret_pos = updated_len - original_len + caret_pos;
+        input[0].setSelectionRange(caret_pos, caret_pos);
+    }
+
+    function Clear() {
+        var elements = document.getElementsByTagName("input");
+        var elementsselect = document.getElementsByClassName("form-control m-select2");
+        for (var ii = 0; ii < elements.length; ii++) {
+            if (elements[ii].type == "text" || elements[ii].type == "number" || elements[ii].type == "email" || elements[ii].type == "password") {
+                elements[ii].value = "";
+            }
+        }
+        for (var ii = 0; ii < elementsselect.length; ii++) {
+            elementsselect[ii].value = "";
+        }
+    }
+
+</script>

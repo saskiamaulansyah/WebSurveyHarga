@@ -1,5 +1,6 @@
-'use strict';
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const db = require('../models');
 // View Index
 const indexProduct = (req, res) => {
     res.render('product/product',{ session:req.session })
@@ -26,6 +27,7 @@ const addProduct = (req, res) => {
         }).then((result) => {
           res.json(result);
         }).catch((err) => {
+          
           const { errors, name } = err;
           const messages = [];
           if (errors.length > 0) {

@@ -10,6 +10,7 @@ const db = require('./models');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const productRouter = require('./routes/product');
 
 const { jwtMiddleware } = require('./middlewares');
 
@@ -35,6 +36,7 @@ app.use(session({
 }));
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/', productRouter);
 // app.use(`${api}/post`, jwtMiddleware, postRouter);
 
 // catch 404 and forward to error handler
