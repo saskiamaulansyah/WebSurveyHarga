@@ -3,7 +3,13 @@ const jwt = require('jsonwebtoken');
 const db = require('../models');
 // View Index
 const indexProduct = (req, res) => {
-    res.render('product/product',{ session:req.session })
+    db.Product.findAll({}).then((product) => {
+      console.log('productsss',product);
+      res.render('product/product', { dataProduct: product, session:req.session});
+  }).catch((err) => {
+      res.status(500).send({ error: err });
+  });
+
 }
 const getProduct = (req, res) => {
     const { id } = req.params;
@@ -20,12 +26,29 @@ const getProduct = (req, res) => {
       res.status(500).send({ error: err });
     });
 };
+
+const changeProductStatus = (req, res) => {
+  const { id } = req.params;
+  var updateData = req.body;
+
+  db.Product.update(
+    { status: "1" },
+    { where: { id },
+
+  }).then((user) => {
+    res.json(user);
+  }).catch((err) => {
+    res.status(500).send({ error: err });
+  });
+}
+
 const addProduct = (req, res) => {
   console.log('er');
         db.Product.create({
-          ...req.body
+          ...req.body,
+          status: "2"
         }).then((result) => {
-          res.json(result);
+          res.redirect('product');
         }).catch((err) => {
           
           const { errors, name } = err;
@@ -34,12 +57,14 @@ const addProduct = (req, res) => {
             errors.forEach((each) => {
               messages.push(each.message);
             });
+            
             res.status(500).send({
               error: {
                 name,
                 messages,
               },
             });
+            
           } else {
             res.status(500).send({ error: err });
           }
@@ -48,6 +73,7 @@ const addProduct = (req, res) => {
 module.exports = {
     indexProduct,
     addProduct,
-    getProduct
+    getProduct,
+    changeProductStatus
 };
   
